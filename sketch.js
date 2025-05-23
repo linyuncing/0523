@@ -37,5 +37,3 @@ function draw() {
     endShape(CLOSE);
   }
 }
-
-<script src="sketch.js"></script>

@@ -26,6 +26,20 @@ function draw() {
   if (predictions.length > 0) {
     const keypoints = predictions[0].scaledMesh;
 
+    // Fill the area between the two sets of points
+    fill('#ff8fab');
+    noStroke();
+    beginShape();
+    for (let i = 0; i < points.length; i++) {
+      const [x, y] = keypoints[points[i]];
+      vertex(x, y);
+    }
+    for (let i = additionalPoints.length - 1; i >= 0; i--) {
+      const [x, y] = keypoints[additionalPoints[i]];
+      vertex(x, y);
+    }
+    endShape(CLOSE);
+
     // Draw the first set of points using beginShape and vertex
     stroke('#ffb3c6');
     strokeWeight(15);
@@ -39,7 +53,7 @@ function draw() {
     endShape(CLOSE);
 
     // Draw the additional points using line
-    stroke('#ffb3c6');
+    stroke('#ffc2d1'); // Change color for the second set of points
     strokeWeight(15);
     for (let i = 0; i < additionalPoints.length - 1; i++) {
       const [x1, y1] = keypoints[additionalPoints[i]];
